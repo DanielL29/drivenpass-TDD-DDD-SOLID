@@ -33,13 +33,13 @@ export class ExpressApp extends Application {
   }
 
   public async init(): Promise<void> {
-    const { PORT } = process.env;
+    const { PORT, HOST } = process.env;
 
     console.clear();
 
     // PRISMA
 
-    this.app.listen(Number(PORT) || 5000, "localhost", () => {
+    this.app.listen(Number(PORT) || 5000, HOST!, () => {
       console.log(`${this.name} server is running on port ${PORT}`);
     });
   }

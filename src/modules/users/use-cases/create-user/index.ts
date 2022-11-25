@@ -1,9 +1,11 @@
-import { userRepoInMemory } from "@modules/users/infra/http/in-memory";
+import { prisma } from "@infra/prisma/config";
+import { PrismaUserRepo } from "@modules/users/repositories/implements/prisma-user-repo";
 import { CreateUserController } from "./create-user.controller";
 import { CreateUserUseCase } from "./create-user.use-case";
 
 function createUserControllerFactory() {
-  const useCase = new CreateUserUseCase(userRepoInMemory);
+  const userRepo = new PrismaUserRepo(prisma);
+  const useCase = new CreateUserUseCase(userRepo);
 
   return new CreateUserController(useCase);
 }
