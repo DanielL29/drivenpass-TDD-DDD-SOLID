@@ -1,4 +1,5 @@
-import { UseCaseToAuth } from "@core/domain/use-case";
+import bcrypt from "bcrypt";
+import { UseCaseUser } from "@core/domain/use-case";
 import { CustomError } from "@core/logic/error";
 import { User } from "@modules/users/domain/user";
 import { UserMapper } from "@modules/users/mappers/user-mapper";
@@ -6,7 +7,7 @@ import { UserRepo } from "@modules/users/repositories/interfaces/user-repo";
 import { CreateUserDTO } from "@shared/dtos/users/create-user.dto";
 import { UserDTO } from "@shared/dtos/users/user.dto";
 
-export class CreateUserUseCase implements UseCaseToAuth {
+export class CreateUserUseCase implements UseCaseUser<CreateUserDTO, UserDTO> {
   private readonly repo: UserRepo;
   private userMapper: UserMapper = new UserMapper();
 
@@ -35,6 +36,9 @@ export class CreateUserUseCase implements UseCaseToAuth {
     await this.verifyEmailConflict(email);
 
     const domainUser = User.create({ name, email, password });
+
+    const encryptedPassword = bcrypt.hashSync(password, 6);
+    domainUser.props.password = encryptedPassword;
 
     await this.repo.create(domainUser);
 
