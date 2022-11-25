@@ -1,4 +1,3 @@
-import bcrypt from "bcrypt";
 import { Entity } from "@core/domain/entity";
 import { Check } from "@core/logic/check";
 import { CustomError } from "@core/logic/error";
@@ -56,7 +55,7 @@ export class User extends Entity<UserProps> {
       {
         name,
         email,
-        password: password || bcrypt.hashSync(password, 10),
+        password,
         createdAt: createdAt || new Date(),
       },
       id

@@ -9,9 +9,9 @@ function createFakeUser({
   const isEmpty = (value: string) => (value === "" ? true : false);
 
   return {
-    name: isEmpty(name) ? "" : name || faker.internet.userName(),
-    email: isEmpty(email) ? "" : email || faker.internet.email(),
-    password: isEmpty(password) ? "" : password || faker.internet.password(6),
+    name: isEmpty(name!) ? "" : name || faker.internet.userName(),
+    email: isEmpty(email!) ? "" : email || faker.internet.email(),
+    password: isEmpty(password!) ? "" : password || faker.internet.password(6),
   };
 }
 

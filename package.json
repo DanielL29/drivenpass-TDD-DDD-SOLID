@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "dev": "dotenv -e .env.development -- ts-node-dev --respawn --transpile-only --exit-child --ignore-watch node_modules -r tsconfig-paths/register ./src/infra/http/server.ts",
-    "test": "jest",
-    "test:entity": "jest entity",
-    "test:use-case": "jest use-case"
+    "test": "dotenv -e .env.test jest",
+    "test:entity": "dotenv -e .env.test jest entity",
+    "test:use-case": "dotenv -e .env.test jest use-case"
   },
   "repository": {
     "type": "git",

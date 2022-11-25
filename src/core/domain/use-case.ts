@@ -8,7 +8,10 @@ export interface UseCase<Request, Response> {
   remove(id: string): Promise<Response>;
 }
 
-export type UseCaseToAuth = Omit<
-  UseCase<CreateUserDTO, UserDTO>,
-  "findAll" | "find" | "remove"
->;
+export interface UseCaseUser<Request, Response> {
+  create(req: Request): Promise<Response>;
+}
+
+export interface UseCaseAuth<Request, Response> {
+  login(req: Request): Promise<Response>;
+}
