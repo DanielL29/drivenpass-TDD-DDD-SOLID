@@ -4,10 +4,19 @@
   "description": "Projeto Drivenpass refatorado com Metodologias/Arquiteturas TDD, DDD e SOLID",
   "main": "index.js",
   "scripts": {
-    "dev": "dotenv -e .env.development -- ts-node-dev --respawn --transpile-only --exit-child --ignore-watch node_modules -r tsconfig-paths/register ./src/infra/http/server.ts",
-    "test": "dotenv -e .env.test jest",
-    "test:entity": "dotenv -e .env.test jest entity",
-    "test:use-case": "dotenv -e .env.test jest use-case"
+    "dev": "npm run dev:load-envs -- ts-node-dev --respawn --transpile-only --exit-child --ignore-watch node_modules -r tsconfig-paths/register ./src/infra/http/server.ts",
+    "dev:prisma:migrate": "npm run dev:load-envs -- prisma migrate dev",
+    "dev:load-envs": "dotenv -e .env.development --",
+    "dev:prisma:studio": "npm run dev:load-envs -- prisma studio",
+    "test": "npm run test:load-envs -- jest",
+    "test:entity": "npm run test:load-envs -- jest entity",
+    "test:use-case": "npm run test:load-envs -- jest use-case",
+    "test:load-envs": "dotenv -e .env.test --",
+    "test:prisma:migrate": "npm run test:load-envs -- prisma migrate dev",
+    "test:prisma:studio": "npm run test:load-envs -- prisma studio"
+  },
+  "prisma": {
+    "schema": "./src/infra/prisma/schema.prisma"
   },
   "repository": {
     "type": "git",
@@ -45,7 +54,6 @@
     "@types/jest": "^29.2.3",
     "@types/jsonwebtoken": "^8.5.9",
     "@types/node": "^18.11.9",
-    "babel-plugin-root-import": "^6.6.0",
     "jest": "^29.3.1",
     "prisma": "^4.6.1",
     "ts-jest": "^29.0.3",
@@ -53,7 +61,6 @@
     "ts-node-dev": "^2.0.0",
     "ts-patch": "^2.0.2",
     "tsconfig-paths": "^4.1.0",
-    "tsx": "^3.12.1",
     "typescript": "^4.9.3",
     "typescript-transform-paths": "^3.4.4"
   }
