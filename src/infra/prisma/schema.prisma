@@ -1,0 +1,114 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model PrismaUser {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+
+  credentials PrismaCredential[]
+  notes       PrismaNote[]
+  cards       PrismaCard[]
+  wifis       PrismaWifi[]
+  documents   PrismaDocument[]
+
+  @@map("users")
+}
+
+model PrismaCredential {
+  id        String   @id @default(uuid())
+  title     String
+  url       String
+  name      String
+  password  String
+  userId    String
+  createdAt DateTime @default(now())
+
+  user PrismaUser @relation(fields: [userId], references: [id])
+
+  @@unique([title, userId])
+  @@map("credentials")
+}
+
+model PrismaNote {
+  id        String   @id @default(uuid())
+  title     String   @db.VarChar(50)
+  note      String   @db.VarChar(1000)
+  userId    String
+  createdAt DateTime @default(now())
+
+  user PrismaUser @relation(fields: [userId], references: [id])
+
+  @@unique([title, userId])
+  @@map("notes")
+}
+
+model PrismaCard {
+  id             String    @id @default(uuid())
+  title          String
+  number         String
+  name           String
+  securityCode   String
+  expirationDate String
+  password       String
+  isVirtual      Boolean
+  type           CardTypes
+  userId         String
+  createdAt      DateTime  @default(now())
+
+  user PrismaUser @relation(fields: [userId], references: [id])
+
+  @@unique([title, userId])
+  @@map("cards")
+}
+
+model PrismaWifi {
+  id        String   @id @default(uuid())
+  title     String
+  name      String
+  password  String
+  userId    String
+  createdAt DateTime @default(now())
+
+  user PrismaUser @relation(fields: [userId], references: [id])
+
+  @@map("wifis")
+}
+
+model PrismaDocument {
+  id                 String        @id @default(uuid())
+  name               String
+  issueDate          String
+  validity           String
+  registrationNumber String        @unique @db.VarChar(12)
+  issuingBody        String        @db.VarChar(2)
+  type               DocumentTypes
+  userId             String
+  createdAt          DateTime      @default(now())
+
+  user PrismaUser @relation(fields: [userId], references: [id])
+
+  @@map("documents")
+}
+
+enum CardTypes {
+  CREDIT
+  DEBIT
+  BOTH
+}
+
+enum DocumentTypes {
+  RG
+  CNH
+}
