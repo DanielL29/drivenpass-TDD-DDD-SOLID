@@ -24,8 +24,6 @@ export class CreateUserUseCase implements UseCaseUser<CreateUserDTO, UserDTO> {
         "user[email] is already registered"
       );
     }
-
-    return isUser;
   }
 
   public async create({
