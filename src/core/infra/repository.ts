@@ -1,3 +1,4 @@
+import { PrismaUser } from ".prisma/client";
 import { User } from "@modules/users/domain/user";
 
 export interface Repository<Model> {
