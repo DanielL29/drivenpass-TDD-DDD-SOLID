@@ -42,7 +42,7 @@ export class Check {
   ): CheckValue {
     if (input.length < length) {
       return this.callBadRequest(
-        `${inputName} must be at minimum ${length} length`
+        `${inputName} must have at least ${length} characters length`
       );
     }
 
@@ -54,6 +54,16 @@ export class Check {
 
     if (emailRegex.test(input) === false) {
       return this.callBadRequest(`${inputName} must be a valid email`);
+    }
+
+    return this.callGoodRequest();
+  }
+
+  public static isUrl(input: string, inputName: string): CheckValue {
+    const urlRegex = /^(https?|chrome):\/\/[^\s$.?#].[^\s]*$/;
+
+    if (urlRegex.test(input) === false) {
+      return this.callBadRequest(`${inputName} must be a valid url`);
     }
 
     return this.callGoodRequest();

@@ -1,11 +1,10 @@
-import { PrismaUser } from ".prisma/client";
-import { User } from "@modules/users/domain/user";
+import { User } from "@shared/modules/users/domain/user";
 
 export interface Repository<Model> {
   create(data: Model): Promise<Model>;
-  findAll(id: string): Promise<Model[]>;
-  find(id: string): Promise<Model>;
-  remove(id: string): Promise<Model>;
+  findAll(userId: string): Promise<Model[]>;
+  find(id: string, userId: string): Promise<Model | null>;
+  remove(id: string, userId: string): Promise<Model | null>;
 }
 
 export type RepositoryToAuth = Omit<
