@@ -38,9 +38,11 @@ export class InMemoryCredentialRepo implements CredentialRepo {
   }
 
   public async findAll(userId: string): Promise<Credential[]> {
-    return this.credentials
-      .map((credential) => this.mapper.toDomain(credential))
-      .filter((credential) => credential.userId === userId);
+    const userCredentials = this.credentials.filter(
+      (credential) => credential.userId === userId
+    );
+
+    return this.mapper.bulkToDomain(userCredentials);
   }
 
   public async find(id: string, userId: string): Promise<Credential | null> {

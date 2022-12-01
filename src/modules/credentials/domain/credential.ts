@@ -77,12 +77,17 @@ export class Credential extends Entity<CredentialProps> {
   public static create(
     { title, url, name, password }: CreateCredentialProps,
     userId: string,
+    isEncrypted: boolean = false,
     id?: string,
     createdAt?: Date
   ) {
     this.checkValues({ title, url, name, password });
 
-    const encryptedPassword = this.encryptPassword(password);
+    let encryptedPassword = password;
+
+    if (!isEncrypted) {
+      encryptedPassword = this.encryptPassword(password);
+    }
 
     return new Credential(
       {
