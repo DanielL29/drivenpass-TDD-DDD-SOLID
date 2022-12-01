@@ -1,18 +1,9 @@
 import { faker } from "@faker-js/faker";
-import { CreateCredentialDTO } from "@shared/dtos/credentials/create-credential.dto";
 import { CredentialRepo } from "@modules/credentials/repositories/interfaces/credential-repo";
 import { InMemoryCredentialRepo } from "@modules/credentials/repositories/implements/in-memory-credential-repo";
 import { FindAllCredentialUseCase } from "./findAll-credential.use-case";
 import { Credential } from "@modules/credentials/domain/credential";
-
-function createFakeCredentialDTO(): CreateCredentialDTO {
-  return {
-    title: faker.random.word(),
-    url: faker.internet.url(),
-    name: faker.lorem.word(),
-    password: faker.internet.password(6),
-  };
-}
+import { createFakeCredentialDTO } from "../create-fake-credential-factory";
 
 describe("find all credential use case", () => {
   let credentialRepo: CredentialRepo;
@@ -26,7 +17,7 @@ describe("find all credential use case", () => {
 
   it("should return an array of credential", async () => {
     const createCredentialReq = createFakeCredentialDTO();
-    const credential = Credential.create(createCredentialReq, userId, false);
+    const credential = Credential.create(createCredentialReq, userId);
     await credentialRepo.create(credential);
 
     const result = await sut.execute(undefined, userId);

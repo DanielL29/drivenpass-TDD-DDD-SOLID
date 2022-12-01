@@ -2,17 +2,8 @@ import { CustomError } from "@core/logic/error";
 import { faker } from "@faker-js/faker";
 import { InMemoryCredentialRepo } from "@modules/credentials/repositories/implements/in-memory-credential-repo";
 import { CredentialRepo } from "@modules/credentials/repositories/interfaces/credential-repo";
-import { CreateCredentialDTO } from "@shared/dtos/credentials/create-credential.dto";
+import { createFakeCredentialDTO } from "../create-fake-credential-factory";
 import { CreateCredentialUseCase } from "./create-credential.use-case";
-
-function createFakeCredentialDTO(): CreateCredentialDTO {
-  return {
-    title: faker.random.word(),
-    url: faker.internet.url(),
-    name: faker.lorem.word(),
-    password: faker.internet.password(6),
-  };
-}
 
 describe("create user use-case", () => {
   let credentialRepo: CredentialRepo;
