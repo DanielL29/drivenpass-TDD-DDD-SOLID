@@ -10,10 +10,11 @@ export class CreateCredentialUseCase
   implements UseCase<CreateCredentialDTO, CredentialDTO>
 {
   private readonly repo: CredentialRepo;
-  private mapper = new CredentialMapper();
+  private readonly mapper: CredentialMapper;
 
   constructor(repo: CredentialRepo) {
     this.repo = repo;
+    this.mapper = new CredentialMapper();
   }
 
   private async verifyTitleConflict(

@@ -19,6 +19,20 @@ export class CredentialMapper
     };
   }
 
+  public bulkToDTO(domains: Credential[]): CredentialDTO[] {
+    return domains.map((domain) => {
+      return {
+        id: domain._id,
+        title: domain.title,
+        url: domain.url,
+        password: domain.decryptPassword(),
+        name: domain.name,
+        userId: domain.userId,
+        registrationDay: dayjs(domain.props.createdAt).format("DD/MM/YYYY"),
+      };
+    });
+  }
+
   public toPersistence(domain: Credential): CredentialPersistence {
     return {
       id: domain._id,
@@ -41,9 +55,18 @@ export class CredentialMapper
   }: CredentialPersistence): Credential {
     return Credential.create(
       { title, url, name, password },
-      id,
       userId,
+      true,
+      id,
       createdAt
+    );
+  }
+
+  public bulkToDomain(persistences: CredentialPersistence[]): Credential[] {
+    const credentialMapper = new CredentialMapper();
+
+    return persistences.map((persistence) =>
+      credentialMapper.toDomain(persistence)
     );
   }
 }
