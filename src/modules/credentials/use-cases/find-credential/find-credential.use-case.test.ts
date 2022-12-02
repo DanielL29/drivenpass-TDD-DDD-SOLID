@@ -32,7 +32,10 @@ describe("find credential use case", () => {
     const userId = faker.datatype.uuid();
 
     await expect(sut.execute(credentialId, userId)).rejects.toEqual(
-      new CustomError("error_not_found", "user credential not found")
+      new CustomError(
+        "error_not_found",
+        "user credential not found or credential does not belong to user"
+      )
     );
   });
 });

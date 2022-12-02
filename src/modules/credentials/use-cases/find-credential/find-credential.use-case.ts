@@ -21,7 +21,10 @@ export class FindCredentialUseCase implements UseCase<string, CredentialDTO> {
     const isCredential = await this.repo.find(credentialId, userId);
 
     if (!isCredential) {
-      throw new CustomError("error_not_found", "user credential not found");
+      throw new CustomError(
+        "error_not_found",
+        "user credential not found or credential does not belong to user"
+      );
     }
 
     return isCredential;
