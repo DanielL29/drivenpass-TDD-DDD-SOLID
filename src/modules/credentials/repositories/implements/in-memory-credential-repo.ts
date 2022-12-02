@@ -6,7 +6,7 @@ import {
 } from "../interfaces/credential-repo";
 
 export class InMemoryCredentialRepo implements CredentialRepo {
-  private readonly credentials: CredentialPersistence[];
+  private credentials: CredentialPersistence[];
   private readonly mapper: CredentialMapper;
 
   constructor() {
@@ -62,7 +62,7 @@ export class InMemoryCredentialRepo implements CredentialRepo {
       (credential) => credential.userId === userId && credential.id === id
     );
 
-    if (!isMemoryCredential) {
+    if (isMemoryCredential < 0) {
       return null;
     }
 

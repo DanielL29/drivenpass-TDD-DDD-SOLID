@@ -2,6 +2,7 @@ import { ExpressRoute } from "@core/infra/route";
 import { createCredentialController } from "@modules/credentials/use-cases/create-credential";
 import { findCredentialController } from "@modules/credentials/use-cases/find-credential";
 import { findAllCredentialController } from "@modules/credentials/use-cases/findAll-credential";
+import { removeCredentialController } from "@modules/credentials/use-cases/remove-credential";
 import { SchemaValidator } from "@shared/infra/http/middlewares/schema-validator";
 import { TokenValidator } from "@shared/infra/http/middlewares/token-validator";
 
@@ -24,6 +25,12 @@ export class CredentialRoute extends ExpressRoute {
       "/:credentialId",
       TokenValidator.validateToken,
       findCredentialController.execute
+    );
+
+    this.router.delete(
+      "/:credentialId",
+      TokenValidator.validateToken,
+      removeCredentialController.execute
     );
   }
 }

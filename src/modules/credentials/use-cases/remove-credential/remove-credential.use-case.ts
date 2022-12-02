@@ -5,7 +5,7 @@ import { CredentialMapper } from "@modules/credentials/mappers/credential-mapper
 import { CredentialRepo } from "@modules/credentials/repositories/interfaces/credential-repo";
 import { CredentialDTO } from "@shared/dtos/credentials/credential.dto";
 
-export class FindCredentialUseCase implements UseCase<string, CredentialDTO> {
+export class RemoveCredentialUseCase implements UseCase<string, CredentialDTO> {
   private readonly repo: CredentialRepo;
   private readonly mapper: CredentialMapper;
 
@@ -35,6 +35,8 @@ export class FindCredentialUseCase implements UseCase<string, CredentialDTO> {
     userId: string
   ): Promise<CredentialDTO> {
     const credential = await this.findCredentialOrFail(credentialId, userId);
+
+    await this.repo.remove(credentialId, userId);
 
     return this.mapper.toDTO(credential);
   }
