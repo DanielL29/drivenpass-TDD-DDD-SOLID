@@ -5,8 +5,8 @@ import { CreateUserController } from "./create-user.controller";
 import { CreateUserUseCase } from "./create-user.use-case";
 
 function createUserControllerFactory() {
-  // const userRepo = new PrismaUserRepo(prisma);
-  const userRepo = userRepoInMemory;
+  const userRepo = new PrismaUserRepo(prisma);
+  // const userRepo = userRepoInMemory;
   const useCase = new CreateUserUseCase(userRepo);
 
   return new CreateUserController(useCase);

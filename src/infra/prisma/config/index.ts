@@ -14,6 +14,10 @@ export class PrismaDatabase {
   public get user() {
     return this.prisma.prismaUser;
   }
+
+  public get credential() {
+    return this.prisma.prismaCredential;
+  }
 }
 
 export const prisma = new PrismaDatabase();

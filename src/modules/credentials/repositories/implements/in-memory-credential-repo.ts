@@ -45,9 +45,9 @@ export class InMemoryCredentialRepo implements CredentialRepo {
     return this.mapper.bulkToDomain(userCredentials);
   }
 
-  public async find(id: string, userId: string): Promise<Credential | null> {
+  public async find(id: string): Promise<Credential | null> {
     const isMemoryCredential = this.credentials.find(
-      (credential) => credential.userId === userId && credential.id === id
+      (credential) => credential.id === id
     );
 
     if (!isMemoryCredential) {
@@ -57,17 +57,13 @@ export class InMemoryCredentialRepo implements CredentialRepo {
     return this.mapper.toDomain(isMemoryCredential);
   }
 
-  public async remove(id: string, userId: string): Promise<Credential | null> {
-    const isMemoryCredential = this.credentials.findIndex(
-      (credential) => credential.userId === userId && credential.id === id
+  public async remove(id: string): Promise<Credential | null> {
+    const isMemoryCredential = this.credentials.find(
+      (credential) => credential.id === id
     );
 
-    if (isMemoryCredential < 0) {
-      return null;
-    }
+    this.credentials.splice(this.credentials.indexOf(isMemoryCredential!), 1);
 
-    this.credentials.splice(isMemoryCredential, 1);
-
-    return this.mapper.toDomain(this.credentials[isMemoryCredential]);
+    return this.mapper.toDomain(isMemoryCredential!);
   }
 }
