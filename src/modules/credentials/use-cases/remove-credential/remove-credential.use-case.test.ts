@@ -21,7 +21,7 @@ describe("remove credential use case", () => {
     const credential = Credential.create(createCredentialReq, userId);
     await repo.create(credential);
 
-    const result = await sut.execute(credential._id, userId);
+    const result = await sut.execute(credential._id);
 
     expect(result).toHaveProperty("id");
     expect(result.id).toEqual(credential._id);
@@ -32,7 +32,7 @@ describe("remove credential use case", () => {
     const userId = faker.datatype.uuid();
     const credential = Credential.create(createCredentialReq, userId);
 
-    await expect(sut.execute(credential._id, userId)).rejects.toEqual(
+    await expect(sut.execute(credential._id)).rejects.toEqual(
       new CustomError(
         "error_not_found",
         "user credential not found or credential does not belong to user"

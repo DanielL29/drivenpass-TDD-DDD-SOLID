@@ -15,11 +15,9 @@ export class RemoveCredentialUseCase implements UseCase<string, CredentialDTO> {
   }
 
   private async findCredentialOrFail(
-    credentialId: string,
-    userId: string
+    credentialId: string
   ): Promise<Credential> {
-    const isCredential = await this.repo.find(credentialId, userId);
-
+    const isCredential = await this.repo.find(credentialId);
     if (!isCredential) {
       throw new CustomError(
         "error_not_found",
@@ -30,13 +28,10 @@ export class RemoveCredentialUseCase implements UseCase<string, CredentialDTO> {
     return isCredential;
   }
 
-  public async execute(
-    credentialId: string,
-    userId: string
-  ): Promise<CredentialDTO> {
-    const credential = await this.findCredentialOrFail(credentialId, userId);
+  public async execute(credentialId: string): Promise<CredentialDTO> {
+    const credential = await this.findCredentialOrFail(credentialId);
 
-    await this.repo.remove(credentialId, userId);
+    await this.repo.remove(credentialId);
 
     return this.mapper.toDTO(credential);
   }
