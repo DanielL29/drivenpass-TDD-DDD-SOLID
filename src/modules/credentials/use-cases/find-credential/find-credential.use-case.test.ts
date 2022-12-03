@@ -21,7 +21,7 @@ describe("find credential use case", () => {
     const credential = Credential.create(createCredentialReq, userId);
     const createdCredential = await repo.create(credential);
 
-    const result = await sut.execute(createdCredential._id, userId);
+    const result = await sut.execute(createdCredential._id);
 
     expect(result).toHaveProperty("id");
     expect(result.id).toEqual(createdCredential._id);
@@ -29,9 +29,8 @@ describe("find credential use case", () => {
 
   it("should throw an error if not found user credential", async () => {
     const credentialId = faker.datatype.uuid();
-    const userId = faker.datatype.uuid();
 
-    await expect(sut.execute(credentialId, userId)).rejects.toEqual(
+    await expect(sut.execute(credentialId)).rejects.toEqual(
       new CustomError(
         "error_not_found",
         "user credential not found or credential does not belong to user"

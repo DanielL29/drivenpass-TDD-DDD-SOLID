@@ -5,8 +5,8 @@ import { AuthUserController } from "./auth-user.controller";
 import { AuthUserUseCase } from "./auth-user.use-case";
 
 function authUserControllerFactory() {
-  // const userRepo = new PrismaUserRepo(prisma);
-  const userRepo = userRepoInMemory;
+  const userRepo = new PrismaUserRepo(prisma);
+  // const userRepo = userRepoInMemory;
   const useCase = new AuthUserUseCase(userRepo);
 
   return new AuthUserController(useCase);
