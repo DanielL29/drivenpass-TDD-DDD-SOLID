@@ -11,9 +11,8 @@ export class FindCredentialController extends BaseController {
 
   protected async executeImpl(req: Request, res: Response): Promise<void> {
     const { credentialId } = req.params;
-    const { _id: userId } = res.locals.user as UserDecoded;
 
-    const credential = await this.useCase.execute(credentialId, userId);
+    const credential = await this.useCase.execute(credentialId);
 
     this.ok<CredentialDTO>(res, credential);
   }
