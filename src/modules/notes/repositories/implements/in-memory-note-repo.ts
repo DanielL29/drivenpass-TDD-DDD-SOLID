@@ -35,7 +35,9 @@ export class InMemoryNoteRepo implements NoteRepo {
   }
 
   public async findAll(userId: string): Promise<Note[]> {
-    throw new Error("Method not implemented.");
+    const notes = this.notes.filter((note) => note.userId === userId);
+
+    return this.mapper.bulkToDomain(notes);
   }
 
   public async find(id: string): Promise<Note | null> {
