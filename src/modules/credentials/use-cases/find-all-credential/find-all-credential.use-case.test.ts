@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker";
 import { CredentialRepo } from "@modules/credentials/repositories/interfaces/credential-repo";
 import { InMemoryCredentialRepo } from "@modules/credentials/repositories/implements/in-memory-credential-repo";
-import { FindAllCredentialUseCase } from "./findAll-credential.use-case";
+import { FindAllCredentialUseCase } from "./find-all-credential.use-case";
 import { Credential } from "@modules/credentials/domain/credential";
 import { createFakeCredentialDTO } from "../create-fake-credential-factory";
 

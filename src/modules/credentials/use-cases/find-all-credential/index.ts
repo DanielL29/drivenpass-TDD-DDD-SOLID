@@ -1,5 +1,5 @@
-import { FindAllCredentialUseCase } from "./findAll-credential.use-case";
-import { FindAllCredentialController } from "./findAll-credential.controller";
+import { FindAllCredentialUseCase } from "./find-all-credential.use-case";
+import { FindAllCredentialController } from "./find-all-credential.controller";
 import { PrismaCredentialRepo } from "@modules/credentials/repositories/implements/prisma-credential-repo";
 import { prisma } from "@infra/prisma/config";
 
