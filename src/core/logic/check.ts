@@ -68,4 +68,18 @@ export class Check {
 
     return this.callGoodRequest();
   }
+
+  public static maximumLength(
+    length: number,
+    input: string,
+    inputName: string
+  ): CheckValue {
+    if (input.length > length) {
+      return this.callBadRequest(
+        `${inputName} must have at most ${length} characters length`
+      );
+    }
+
+    return this.callGoodRequest();
+  }
 }
