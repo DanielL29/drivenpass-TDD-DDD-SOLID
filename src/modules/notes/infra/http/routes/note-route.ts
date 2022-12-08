@@ -1,6 +1,7 @@
 import { ExpressRoute } from "@core/infra/route";
 import { createNoteController } from "@modules/notes/use-cases/create-note";
 import { findAllNoteController } from "@modules/notes/use-cases/find-all-note";
+import { findNoteController } from "@modules/notes/use-cases/find-note";
 import { SchemaValidator } from "@shared/infra/http/middlewares/schema-validator";
 import { TokenValidator } from "@shared/infra/http/middlewares/token-validator";
 
@@ -17,6 +18,12 @@ export class NoteRoute extends ExpressRoute {
       "/",
       TokenValidator.validateToken,
       findAllNoteController.execute
+    );
+
+    this.router.get(
+      "/:noteId",
+      TokenValidator.validateToken,
+      findNoteController.execute
     );
   }
 }
