@@ -18,7 +18,10 @@ export class RemoveNoteUseCase implements UseCase<string, NoteDTO> {
     const isNote = await this.repo.find(noteId);
 
     if (!isNote) {
-      throw new CustomError("error_not_found", "user note not found");
+      throw new CustomError(
+        "error_not_found",
+        "user note not found or note does not belong to user"
+      );
     }
 
     return isNote;
@@ -26,6 +29,8 @@ export class RemoveNoteUseCase implements UseCase<string, NoteDTO> {
 
   public async execute(noteId: string): Promise<NoteDTO> {
     const note = await this.findNoteOrFail(noteId);
+
+    await this.repo.remove(noteId);
 
     return this.mapper.toDTO(note);
   }

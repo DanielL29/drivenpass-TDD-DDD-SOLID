@@ -31,7 +31,10 @@ describe("remove note use case", () => {
     const note = Note.create(createNoteDTO, userId);
 
     await expect(sut.execute(note._id)).rejects.toEqual(
-      new CustomError("error_not_found", "user note not found")
+      new CustomError(
+        "error_not_found",
+        "user note not found or note does not belong to user"
+      )
     );
   });
 });
