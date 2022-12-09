@@ -1,9 +1,10 @@
 import { CreateNoteUseCase } from "./create-note.use-case";
 import { CreateNoteController } from "./create-note.controller";
-import { noteRepoInMemory } from "@modules/notes/infra/http/in-memory";
+import { PrismaNoteRepo } from "@modules/notes/repositories/implements/prisma-note-repo";
+import { prisma } from "@infra/prisma/config";
 
 function createNoteControllerFactory() {
-  const repo = noteRepoInMemory;
+  const repo = new PrismaNoteRepo(prisma);
   const useCase = new CreateNoteUseCase(repo);
 
   return new CreateNoteController(useCase);
