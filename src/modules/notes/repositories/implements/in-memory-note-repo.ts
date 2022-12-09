@@ -51,6 +51,10 @@ export class InMemoryNoteRepo implements NoteRepo {
   }
 
   public async remove(id: string): Promise<Note | null> {
-    throw new Error("Method not implemented.");
+    const isNote = this.notes.find((note) => note.id === id);
+
+    this.notes.splice(this.notes.indexOf(isNote!), 1);
+
+    return this.mapper.toDomain(isNote);
   }
 }
