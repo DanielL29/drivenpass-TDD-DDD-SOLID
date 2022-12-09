@@ -55,6 +55,6 @@ export class InMemoryNoteRepo implements NoteRepo {
 
     this.notes.splice(this.notes.indexOf(isNote!), 1);
 
-    return this.mapper.toDomain(isNote);
+    return this.mapper.toDomain(isNote!);
   }
 }
