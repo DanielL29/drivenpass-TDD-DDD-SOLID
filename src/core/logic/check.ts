@@ -82,4 +82,65 @@ export class Check {
 
     return this.callGoodRequest();
   }
+
+  public static isNumber(input: any, inputName: string): CheckValue {
+    const numberRegex = /[0-9]/;
+
+    if (numberRegex.test(input) === false) {
+      return this.callBadRequest(`${inputName} must have only numbers`);
+    }
+
+    return this.callGoodRequest();
+  }
+
+  public static validateDateFormat(
+    input: string,
+    inputName: string
+  ): CheckValue {
+    const dateRegex = /^([0-9]{2})\/?([0-9]{2})$/;
+
+    if (dateRegex.test(input) === false) {
+      return this.callBadRequest(`${inputName} must have format: MM/YY`);
+    }
+
+    return this.callGoodRequest();
+  }
+
+  public static verifyDateRange(input: string, inputName: string): CheckValue {
+    const date = input.split("/");
+    const currentYear = new Date().getFullYear();
+    const formattedYear = Number(currentYear.toString().slice(2, 4));
+
+    if (Number(date[0]) > 12 || Number(date[0]) <= 0) {
+      return this.callBadRequest(
+        `${inputName} must be a valid month between 01-12`
+      );
+    } else if (Number(date[1]) < formattedYear) {
+      return this.callBadRequest(
+        `${inputName} must be greater than or equal to the current year: ${currentYear} (${formattedYear})`
+      );
+    }
+
+    return this.callGoodRequest();
+  }
+
+  public static isBoolean(input: any, inputName: string): CheckValue {
+    if (typeof input !== "boolean") {
+      return this.callBadRequest(
+        `${inputName} must be a boolean true or false`
+      );
+    }
+
+    return this.callGoodRequest();
+  }
+
+  public static validateCardType(input: string, inputName: string): CheckValue {
+    const cardTypesRegex = /[CREDIT]|[DEBIT]|[BOTH]/;
+
+    if (cardTypesRegex.test(input) === false) {
+      return this.callBadRequest(`${inputName} must be CREDIT | DEBIT | BOTH`);
+    }
+
+    return this.callGoodRequest();
+  }
 }
