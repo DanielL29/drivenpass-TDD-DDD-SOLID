@@ -35,7 +35,11 @@ export class InMemoryCardRepo implements CardRepo {
   }
 
   public async findAll(userId: string): Promise<Card[]> {
-    throw new Error("Method not implemented.");
+    const cardPersistences = this.cards.filter(
+      (card) => card.userId === userId
+    );
+
+    return this.mapper.bulkToDomain(cardPersistences);
   }
 
   public async find(id: string): Promise<Card | null> {
