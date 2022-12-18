@@ -1,5 +1,6 @@
 import { ExpressRoute } from "@core/infra/route";
 import { createCardController } from "@modules/cards/use-cases/create-card";
+import { findAllCardController } from "@modules/cards/use-cases/find-all-card";
 import { SchemaValidator } from "@shared/infra/http/middlewares/schema-validator";
 import { TokenValidator } from "@shared/infra/http/middlewares/token-validator";
 
@@ -10,6 +11,12 @@ export class CardRoute extends ExpressRoute {
       TokenValidator.validateToken,
       SchemaValidator.validateSchema("createCardSchema"),
       createCardController.execute
+    );
+
+    this.router.get(
+      "/",
+      TokenValidator.validateToken,
+      findAllCardController.execute
     );
   }
 }

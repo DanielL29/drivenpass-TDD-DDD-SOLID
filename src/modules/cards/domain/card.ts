@@ -68,7 +68,7 @@ export class Card extends Entity<CardProps> {
     return this.props.userId;
   }
 
-  public static checkValues({
+  private static checkValues({
     title,
     number,
     name,
