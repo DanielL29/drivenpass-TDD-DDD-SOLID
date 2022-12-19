@@ -53,6 +53,10 @@ export class InMemoryCardRepo implements CardRepo {
   }
 
   public async remove(id: string): Promise<Card | null> {
-    throw new Error("Method not implemented.");
+    const card = this.cards.find((card) => card.id === id);
+
+    this.cards.splice(this.cards.indexOf(card!), 1);
+
+    return this.mapper.toDomain(card);
   }
 }

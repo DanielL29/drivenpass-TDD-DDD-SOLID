@@ -2,6 +2,7 @@ import { ExpressRoute } from "@core/infra/route";
 import { createCardController } from "@modules/cards/use-cases/create-card";
 import { findAllCardController } from "@modules/cards/use-cases/find-all-card";
 import { findCardController } from "@modules/cards/use-cases/find-card";
+import { removeCardController } from "@modules/cards/use-cases/remove-card";
 import { SchemaValidator } from "@shared/infra/http/middlewares/schema-validator";
 import { TokenValidator } from "@shared/infra/http/middlewares/token-validator";
 
@@ -24,6 +25,12 @@ export class CardRoute extends ExpressRoute {
       "/:cardId",
       TokenValidator.validateToken,
       findCardController.execute
+    );
+
+    this.router.delete(
+      "/:cardId",
+      TokenValidator.validateToken,
+      removeCardController.execute
     );
   }
 }
