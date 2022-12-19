@@ -43,7 +43,13 @@ export class InMemoryCardRepo implements CardRepo {
   }
 
   public async find(id: string): Promise<Card | null> {
-    throw new Error("Method not implemented.");
+    const isCard = this.cards.find((card) => card.id === id);
+
+    if (!isCard) {
+      return null;
+    }
+
+    return this.mapper.toDomain(isCard);
   }
 
   public async remove(id: string): Promise<Card | null> {
