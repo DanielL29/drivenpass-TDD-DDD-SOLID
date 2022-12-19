@@ -22,6 +22,10 @@ export class PrismaDatabase {
   public get note() {
     return this.prisma.prismaNote;
   }
+
+  public get card() {
+    return this.prisma.prismaCard;
+  }
 }
 
 export const prisma = new PrismaDatabase();
