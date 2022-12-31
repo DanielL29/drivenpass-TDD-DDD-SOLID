@@ -1,7 +1,6 @@
 import { CustomError } from "@core/logic/error";
 import { faker } from "@faker-js/faker";
 import { InMemoryWifiRepo } from "@modules/wifis/repositories/implements/in-memory-wifi-repo";
-import Cryptr from "cryptr";
 import { createFakeWifiDTO } from "../create-fake-wifi-factory";
 import { CreateWifiUseCase } from "./create-wifi.use-case";
 
