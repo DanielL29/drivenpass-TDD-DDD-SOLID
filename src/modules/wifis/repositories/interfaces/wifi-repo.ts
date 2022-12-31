@@ -10,6 +10,4 @@ export interface WifiPersistence {
   createdAt: Date;
 }
 
-export interface WifiRepo extends Repository<Wifi> {
-  findByTitle(title: string, userId: string): Promise<Wifi | null>;
-}
+export interface WifiRepo extends Repository<Wifi> {}

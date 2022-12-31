@@ -26,6 +26,10 @@ export class PrismaDatabase {
   public get card() {
     return this.prisma.prismaCard;
   }
+
+  public get wifi() {
+    return this.prisma.prismaWifi;
+  }
 }
 
 export const prisma = new PrismaDatabase();
