@@ -5,7 +5,7 @@ import { WifiMapper } from "@modules/wifis/mappers/wifi-mapper";
 import { WifiRepo } from "@modules/wifis/repositories/interfaces/wifi-repo";
 import { WifiDTO } from "@shared/dtos/wifis/wifi.dto";
 
-export class FindWifiUseCase implements UseCase<string, WifiDTO> {
+export class RemoveWifiUseCase implements UseCase<string, WifiDTO> {
   private readonly repo: WifiRepo;
   private readonly mapper: WifiMapper;
 
@@ -29,6 +29,8 @@ export class FindWifiUseCase implements UseCase<string, WifiDTO> {
 
   public async execute(wifiId: string): Promise<WifiDTO> {
     const wifi = await this.findWifiOrFail(wifiId);
+
+    await this.repo.remove(wifiId);
 
     return this.mapper.toDTO(wifi);
   }
