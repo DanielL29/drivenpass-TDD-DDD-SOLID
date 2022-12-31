@@ -57,6 +57,6 @@ export class InMemoryCardRepo implements CardRepo {
 
     this.cards.splice(this.cards.indexOf(card!), 1);
 
-    return this.mapper.toDomain(card);
+    return this.mapper.toDomain(card!);
   }
 }

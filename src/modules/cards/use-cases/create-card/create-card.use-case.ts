@@ -34,8 +34,8 @@ export class CreateCardUseCase implements UseCase<CreateCardDTO, CardDTO> {
 
     const domain = Card.create(useCaseReq, userId);
 
-    const createdCard = await this.repo.create(domain);
+    await this.repo.create(domain);
 
-    return this.mapper.toDTO(createdCard);
+    return this.mapper.toDTO(domain);
   }
 }

@@ -20,17 +20,9 @@ export class CredentialMapper
   }
 
   public bulkToDTO(domains: Credential[]): CredentialDTO[] {
-    return domains.map((domain) => {
-      return {
-        id: domain._id,
-        title: domain.title,
-        url: domain.url,
-        password: domain.decryptPassword(),
-        name: domain.name,
-        userId: domain.userId,
-        registrationDay: dayjs(domain.props.createdAt).format("DD/MM/YYYY"),
-      };
-    });
+    const credentialMapper = new CredentialMapper();
+
+    return domains.map((domain) => credentialMapper.toDTO(domain));
   }
 
   public toPersistence(domain: Credential): CredentialPersistence {
