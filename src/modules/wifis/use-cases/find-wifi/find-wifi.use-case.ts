@@ -18,7 +18,10 @@ export class FindWifiUseCase implements UseCase<string, WifiDTO> {
     const isWifi = await this.repo.find(wifiId);
 
     if (!isWifi) {
-      throw new CustomError("error_not_found", "user wifi not found");
+      throw new CustomError(
+        "error_not_found",
+        "user wifi not found or wifi does not belong to user"
+      );
     }
 
     return isWifi;

@@ -31,7 +31,10 @@ describe("find wifi use case", () => {
     const wifiId = faker.datatype.uuid();
 
     await expect(sut.execute(wifiId)).rejects.toEqual(
-      new CustomError("error_not_found", "user wifi not found")
+      new CustomError(
+        "error_not_found",
+        "user wifi not found or wifi does not belong to user"
+      )
     );
   });
 });
