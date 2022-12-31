@@ -11,21 +11,6 @@ export class InMemoryWifiRepo implements WifiRepo {
     this.mapper = new WifiMapper();
   }
 
-  public async findByTitle(
-    title: string,
-    userId: string
-  ): Promise<Wifi | null> {
-    const isWifi = this.wifis.find(
-      (wifi) => wifi.title === title && wifi.userId === userId
-    );
-
-    if (!isWifi) {
-      return null;
-    }
-
-    return this.mapper.toDomain(isWifi);
-  }
-
   public async create(data: Wifi): Promise<Wifi> {
     const wifiPersistence = this.mapper.toPersistence(data);
 
