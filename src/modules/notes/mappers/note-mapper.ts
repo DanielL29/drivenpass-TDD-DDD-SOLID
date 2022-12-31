@@ -32,7 +32,7 @@ export class NoteMapper implements Mapper<NoteDTO, Note, NotePersistence> {
     userId,
     createdAt,
   }: NotePersistence): Note {
-    return new Note({ title, note, userId, createdAt }, id);
+    return Note.create({ title, note }, userId, id, createdAt);
   }
 
   public bulkToDomain(persistences: NotePersistence[]): Note[] {

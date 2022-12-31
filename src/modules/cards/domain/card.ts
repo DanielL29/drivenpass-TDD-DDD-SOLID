@@ -100,7 +100,6 @@ export class Card extends Entity<CardProps> {
       Check.verifyDateRange(expirationDate, "card[expirationDate]"),
       Check.validateCardType(type, "card[type]"),
     ];
-
     const verifyCheckedValues = Check.checkAllValues(checkInputValues);
 
     if (!verifyCheckedValues.checked) {
