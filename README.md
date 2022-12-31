@@ -870,15 +870,21 @@ DELETE /wifis/:wifiId
 To run this project, you will need to add the following environment variables to your .env file
 
 `POSTGRES_USER = your postgresql user`
+
 `POSTGRES_PASSWORD = your postgresql password`
+
 `POSTGRES_DB = your postgresql database name`
+
 `POSTGRES_PORT = postgresql port default to 5432`
 
 `HOST = localhost`
 
 `JWT_SECRET = any string`
+
 `CRYPTR_SECRET = any string`
+
 `NODE_ENV = test | development`
+
 `PORT = 5000`
 
 `DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${HOST}:${POSTGRES_PORT}/${POSTGRES_DB}`
@@ -890,13 +896,13 @@ To run this project, you will need to add the following environment variables to
 Clone the project
 
 ```bash
-  git clone https://github.com/DanielL29/projeto19-drivenpass
+  git clone https://github.com/DanielL29/drivenpass-TDD-DDD-SOLID.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd projeto19-drivenpass/
+  cd drivenpass-TDD-DDD-SOLID/
 ```
 
 Install dependencies
