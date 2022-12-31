@@ -42,8 +42,14 @@ export class InMemoryWifiRepo implements WifiRepo {
     return this.mapper.bulkToDomain(wifiPersistences);
   }
 
-  find(id: string): Promise<Wifi | null> {
-    throw new Error("Method not implemented.");
+  public async find(id: string): Promise<Wifi | null> {
+    const isWifiPersistence = this.wifis.find((wifi) => wifi.id === id);
+
+    if (!isWifiPersistence) {
+      return null;
+    }
+
+    return this.mapper.toDomain(isWifiPersistence);
   }
 
   remove(id: string): Promise<Wifi | null> {
