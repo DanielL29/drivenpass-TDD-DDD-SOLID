@@ -52,7 +52,11 @@ export class InMemoryWifiRepo implements WifiRepo {
     return this.mapper.toDomain(isWifiPersistence);
   }
 
-  remove(id: string): Promise<Wifi | null> {
-    throw new Error("Method not implemented.");
+  public async remove(id: string): Promise<Wifi | null> {
+    const isWifi = this.wifis.find((wifi) => wifi.id === id);
+
+    this.wifis.splice(this.wifis.indexOf(isWifi!), 1);
+
+    return this.mapper.toDomain(isWifi!);
   }
 }
