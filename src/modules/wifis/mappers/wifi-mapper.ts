@@ -20,7 +20,7 @@ export class WifiMapper implements Mapper<WifiDTO, Wifi, WifiPersistence> {
       id: domain._id,
       title: domain.title,
       name: domain.name,
-      password: domain.decryptPassword(),
+      password: domain.password,
       userId: domain.userId,
       createdAt: domain.props.createdAt,
     };
@@ -33,8 +33,6 @@ export class WifiMapper implements Mapper<WifiDTO, Wifi, WifiPersistence> {
     userId,
     createdAt,
   }: WifiPersistence): Wifi {
-    // return new Wifi({ title, name, password, userId, createdAt }, id);
-
     return Wifi.create({ title, name, password }, userId, true, id, createdAt);
   }
   public bulkToDomain(persistences: WifiPersistence[]): Wifi[] {
