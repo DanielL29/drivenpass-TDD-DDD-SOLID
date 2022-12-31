@@ -42,7 +42,6 @@ Projeto Drivenpass refatorado com Metodologias/Arquiteturas TDD, DDD e SOLID
 - Create / Get / GetById / Delete Notes
 - Create / Get / GetById / Delete Cards
 - Create / Get / GetById / Delete Wifis
-- Create / Get / GetById / Delete Documents
 
 </br>
 
@@ -427,98 +426,6 @@ Response:
 
 <details style="margin: 10px">
 <summary style="font-size: 18px"> <span style="font-weight:700; margin-right:10px; color: #76B1F8">DELETE</span> /wifis/:wifiId</summary>
-
-Header:
-
-```json
-{
-    "Authorization": Bearer token
-}
-```
-
-</details>
-
-<details style="margin: 10px">
-<summary style="font-size: 18px"> <span style="font-weight:700; margin-right:10px; color: #9FE58A">POST</span> /documents</summary>
-
-Header:
-
-```json
-{
-    "Authorization": Bearer token
-}
-```
-
-Body:
-
-```json
-{
-  "name": string,
-  "issueDate": "DD/MM/YYYY",
-  "validity": "DD/MM/YYYY",
-  "registrationNumber": string,
-  "issuingBody": string,
-  "type": "RG" | "CNH"
-}
-
-```
-
-</details>
-
-<details style="margin: 10px">
-<summary style="font-size: 18px"> <span style="font-weight:700; margin-right:10px; color: #76B1F8">GET</span> /documents</summary>
-
-Header:
-
-```json
-{
-    "Authorization": Bearer token
-}
-```
-
-Response:
-
-```json
-{
-  "name": string,
-  "issueDate": "DD/MM/YYYY",
-  "validity": "DD/MM/YYYY",
-  "registrationNumber": string,
-  "issuingBody": string,
-  "type": "RG" | "CNH"
-}
-```
-
-</details>
-
-<details style="margin: 10px">
-<summary style="font-size: 18px"> <span style="font-weight:700; margin-right:10px; color: #76B1F8">GET</span> /documents/:documentId</summary>
-
-Header:
-
-```json
-{
-    "Authorization": Bearer token
-}
-```
-
-Response:
-
-```json
-{
-  "name": string,
-  "issueDate": "DD/MM/YYYY",
-  "validity": "DD/MM/YYYY",
-  "registrationNumber": string,
-  "issuingBody": string,
-  "type": "RG" | "CNH"
-}
-```
-
-</details>
-
-<details style="margin: 10px">
-<summary style="font-size: 18px"> <span style="font-weight:700; margin-right:10px; color: #76B1F8">DELETE</span> /documents/:documentId</summary>
 
 Header:
 
@@ -958,123 +865,23 @@ DELETE /wifis/:wifiId
 
 ####
 
-### Create document
-
-```http
-POST /documents
-```
-
-#### Request:
-
-| Body                 | Type     | Description                                    |
-| :------------------- | :------- | :--------------------------------------------- |
-| `name`               | `string` | **Required**. name title                       |
-| `issueDate`          | `string` | **Required**. document issue date              |
-| `validity`           | `string` | **Required**. document validity                |
-| `registrationNumber` | `string` | **Required**. document number                  |
-| `issuingBody`        | `string` | **Required**. state where document was created |
-| `type`               | `string` | **Required**. document type                    |
-
-`IssueDate DD/MM/YYYY`
-`Validity DD/MM/YYYY`
-`IssuingBody min/max length 2`
-`Type [RG, CNH]`
-
-####
-
-| Headers         | Type     | Description                  |
-| :-------------- | :------- | :--------------------------- |
-| `Authorization` | `string` | **Required**. Bearer 'token' |
-
-####
-
-### Get documents
-
-```http
-GET /documents
-```
-
-### Request:
-
-####
-
-| Headers         | Type     | Description                  |
-| :-------------- | :------- | :--------------------------- |
-| `Authorization` | `string` | **Required**. Bearer 'token' |
-
-####
-
-#### Response:
-
-```json
-{
-  "name": string,
-  "issueDate": "DD/MM/YYYY",
-  "validity": "DD/MM/YYYY",
-  "registrationNumber": string,
-  "issuingBody": "SP",
-  "type": "RG" | "CNH"
-}
-```
-
-#
-
-### Get document
-
-```http
-GET /documents/:documentId
-```
-
-### Request:
-
-####
-
-| Headers         | Type     | Description                  |
-| :-------------- | :------- | :--------------------------- |
-| `Authorization` | `string` | **Required**. Bearer 'token' |
-
-####
-
-#### Response:
-
-```json
-{
-  "name": string,
-  "issueDate": "DD/MM/YYYY",
-  "validity": "DD/MM/YYYY",
-  "registrationNumber": string,
-  "issuingBody": "SP",
-  "type": "RG" | "CNH"
-}
-```
-
-### Delete document
-
-```http
-DELETE /crdocuments/:documentId
-```
-
-####
-
-| Headers         | Type     | Description                  |
-| :-------------- | :------- | :--------------------------- |
-| `Authorization` | `string` | **Required**. Bearer 'token' |
-
-####
-
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
 
-`DATABASE_URL = postgres://YOUR-USER-NAME:YOUR-PASSWORD@Hostname:5432/DatabaseName`
+`POSTGRES_USER = your postgresql user`
+`POSTGRES_PASSWORD = your postgresql password`
+`POSTGRES_DB = your postgresql database name`
+`POSTGRES_PORT = postgresql port default to 5432`
 
-`SHADOW_DATABASE_URL = postgres://YOUR-USER-NAME:YOUR-PASSWORD@Hostname:5432/DatabaseName`
+`HOST = localhost`
 
-`PORT = number `
+`JWT_SECRET = any string`
+`CRYPTR_SECRET = any string`
+`NODE_ENV = test | development`
+`PORT = 5000`
 
-`CRYPTR_SECRET_KEY = any string`
-
-`SECRET_KEY = any string`
+`DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${HOST}:${POSTGRES_PORT}/${POSTGRES_DB}`
 
 #
 
